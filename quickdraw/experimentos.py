@@ -17,6 +17,7 @@ from .config import FRACCIONES, PARES, Config
 from .entrenar import (DISPOSITIVO, busqueda, entrenar_o_cargar, mejor_combinacion,
                        predecir, rejilla_m1, rejilla_m2, ruta_modelo)
 from .raster import indices_completos, obtener_cache
+from .tablas import ORDEN_MODELOS
 
 
 # --- 1. Datos -------------------------------------------------------------------
@@ -102,6 +103,12 @@ def _por_semilla(preds, nombre):
     return {s: p for (n, s), p in preds.items() if n == nombre}
 
 
+def _nombres(claves):
+    """Modelos presentes: primero M1, M2 y M2-P, después cualquier otro (p. ej. M3)."""
+    nombres = {n for n, _ in claves}
+    return [n for n in ORDEN_MODELOS if n in nombres] + sorted(nombres - set(ORDEN_MODELOS))
+
+
 # --- 5. Evaluación, hipótesis y figuras ---------------------------------------------
 
 def evaluar(cfg: Config, D, modelos, preds, particion: str):
@@ -134,7 +141,7 @@ def evaluar(cfg: Config, D, modelos, preds, particion: str):
     # Figuras
     prog = metricas.mascara_progresiva(cache, cfg.min_trazos_progresivo)
     curvas = {}
-    for nombre in ("M1", "M2", "M2-P"):
+    for nombre in _nombres(preds):
         ps = _por_semilla(preds, nombre)
         if ps:
             curvas[nombre] = np.stack([metricas.correctos_por_fraccion(cache, p)[prog].mean(0)
@@ -182,11 +189,11 @@ def _ejemplos(cache, n: int = 4, semilla: int = 0):
 
 # --- 6. Latencia --------------------------------------------------------------------
 
-def latencia(modelos, repeticiones: int = 200):
+def latencia(modelos, repeticiones: int = 200, resolucion: int = 28):
     """Milisegundos por predicción en CPU con un solo dibujo (meta: < 50 ms)."""
     filas = []
-    x = torch.zeros(1, 1, 28, 28)
-    for nombre in ("M1", "M2", "M2-P"):
+    x = torch.zeros(1, 1, resolucion, resolucion)
+    for nombre in _nombres(modelos):
         claves = [k for k in modelos if k[0] == nombre]
         if not claves:
             continue

@@ -78,7 +78,8 @@ def desde_resultados(ruta_resultados, particion: str = "validacion"):
     """Regenera las tres tablas a partir de lo que ya está en disco."""
     res = Path(ruta_resultados)
     out = res / particion / "tablas"
-    busqueda(pd.read_csv(res / "tabla_busqueda.csv"), out / "tabla_busqueda.tex")
+    if (res / "tabla_busqueda.csv").exists():      # no existe en carpetas de experimentos
+        busqueda(pd.read_csv(res / "tabla_busqueda.csv"), out / "tabla_busqueda.tex")
     modelos(pd.read_csv(res / particion / "metricas.csv"), out / "tabla_modelos.tex")
     hipotesis(json.loads((res / particion / "hipotesis.json").read_text()), out / "tabla_hipotesis.tex")
     return out

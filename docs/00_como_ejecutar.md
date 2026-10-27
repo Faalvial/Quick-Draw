@@ -4,7 +4,7 @@ Este documento explica cómo correr todo, qué se guarda, cómo retomar cuando C
 
 ## 1. Preparar Drive (una sola vez)
 
-El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra_30`, 62 MB) y los modelos y resultados de la corrida de referencia (`trabajo/`, ver la sección 9).
+El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra_30`, 62 MB) y los modelos y resultados de la corrida de referencia (`trabajo/`, ver la sección 10).
 
 1. Una persona del grupo abre un notebook en blanco en Colab y clona el repositorio dentro de Drive:
 
@@ -19,7 +19,7 @@ El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra
 
 Si prefieren otra ruta, cambien `RAIZ` en la primera celda del notebook. Si borran `datos/muestra_30`, el notebook la vuelve a descargar con `datos/download_sample.py` (unos minutos; sale idéntica por la semilla 2026).
 
-**Fuera de Colab** basta con `git clone` y la sección 8.
+**Fuera de Colab** basta con `git clone` y la sección 9.
 
 ## 2. Primera prueba: modo rápido
 
@@ -90,9 +90,27 @@ El código protege contra la mezcla de resultados viejos y nuevos:
 | La arquitectura (`quickdraw/modelos.py`) o la forma de entrenar (`quickdraw/entrenar.py`) | **Esto no se detecta solo.** Borren `trabajo/modelos/` y `trabajo/resultados/predicciones_*`. |
 | Métricas, hipótesis o figuras | Basta con volver a ejecutar la sección 5 del notebook: no hace falta reentrenar. |
 
-Si dudan, borrar `trabajo/` entero siempre es seguro: solo cuesta volver a calcular.
+Si dudan, borrar `trabajo/` entero siempre es seguro: solo cuesta volver a calcular. Ojo: `trabajo/` trae la corrida oficial del repositorio; si lo borran, recupérenlo con `git checkout -- trabajo`.
 
-## 7. El conjunto de prueba (semana 13)
+## 7. Experimentos de la guía de dominio sin tocar la corrida oficial
+
+Nunca hagan un experimento sobre `trabajo/`: es la corrida oficial. Hay dos casos.
+
+**Experimentos que no reentrenan** (otro número de vecinos, otra perplejidad de t-SNE, bootstrap con 200 remuestreos, matrices de confusión de M2…). Después de ejecutar el notebook completo (todo se carga, nada se entrena), agreguen una celda al final:
+
+```python
+cfg_p = replace(cfg, ruta_trabajo=RAIZ / "trabajo_pruebas", vecinos_knn=5)   # el cambio que quieran
+R_p = E.evaluar(cfg_p, D, modelos, preds_val, "validacion")
+display(R_p["veredictos"])
+```
+
+`evaluar` escribe en `trabajo_pruebas/resultados/validacion/` y deja intacto `trabajo/`. Con funciones sueltas (`metricas`, `analisis`, `estadistica`) no se escribe nada en disco.
+
+**Experimentos que reentrenan** (otro grosor, otros dibujos por categoría, el esquema mixto…). En la primera celda pongan `CARPETA_TRABAJO = "trabajo_pruebas"` o `MODO_RAPIDO = True`, y hagan el cambio en la línea `cfg = replace(cfg, ...)` de la segunda celda, que va **después** de `config_rapida` (si no, el modo rápido lo pisa). En `trabajo_pruebas` el notebook reentrena todo con datos completos (horas); en modo rápido tarda minutos pero los números no significan nada: sirve para ver el efecto, no para el paper.
+
+Si un cambio va a quedarse, se decide en grupo con resultados de validación y se anota para el paper.
+
+## 8. El conjunto de prueba (semana 13)
 
 Mientras `USAR_PRUEBA = False`, ninguna función toca los dibujos de prueba: ni se rasterizan, y `predecir_todo(..., "prueba")` lanza un error. En la semana 13, con los modelos congelados:
 
@@ -100,7 +118,7 @@ Mientras `USAR_PRUEBA = False`, ninguna función toca los dibujos de prueba: ni 
 2. ejecuten todo **una sola vez**;
 3. no cambien nada después de ver los resultados de prueba. Si algo sale mal, se reporta tal cual en el paper.
 
-## 8. Fuera de Colab
+## 9. Fuera de Colab
 
 ```bash
 pip install -r requirements.txt
@@ -109,6 +127,6 @@ cd notebooks && jupyter notebook proyecto_quickdraw.ipynb
 
 Fuera de Colab, el notebook usa como raíz la carpeta de arriba de `notebooks/` (o la variable de entorno `QD_RAIZ`). Las pruebas automáticas se ejecutan desde la raíz del repositorio con `pytest tests`.
 
-## 9. Resultados de la verificación (no son del proyecto)
+## 10. Resultados de la verificación (no son del proyecto)
 
 Para comprobar que el código aprende, se hizo una corrida mediana en CPU: 1 000 dibujos por categoría, 4 épocas y 1 semilla. Exactitud final: M1 0,52, M2 0,69 y M2-P 0,63. AUC progresiva: 0,39, 0,50 y 0,53. Con tan poco entrenamiento estos números **no sirven para el paper**; solo muestran que el orden esperado aparece. En esa corrida H2 salió refutada porque M2-P perdió 5,8 puntos de exactitud final; en `04_entrenamiento_y_busqueda.md` hay una modificación posible si eso se repite en la corrida real.
