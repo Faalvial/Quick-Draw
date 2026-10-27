@@ -8,6 +8,8 @@ import json
 import random
 import statistics
 
+import urllib.parse
+
 import requests
 
 URL_RAW = "https://storage.googleapis.com/quickdraw_dataset/full/raw/{}.ndjson"
@@ -25,7 +27,7 @@ def medir_duracion(categoria: str = "cat", n: int = 3000, semilla: int = 2026,
     rng = random.Random(semilla)
     reservas = {True: [], False: []}
     vistos = {True: 0, False: 0}
-    with requests.get(URL_RAW.format(categoria), stream=True, timeout=60) as r:
+    with requests.get(URL_RAW.format(urllib.parse.quote(categoria)), stream=True, timeout=60) as r:
         r.raise_for_status()
         for i, linea in enumerate(r.iter_lines()):
             if max_lineas and i >= max_lineas:
