@@ -29,3 +29,10 @@ def test_esquema_mixto():
     idx = indices_de_epoca(cache, "mixto", np.random.default_rng(0), prob_completo=0.5)
     completos = (idx - cache["inicio"] == 4).mean()
     assert 0.55 < completos < 0.65        # 0,5 completos + 0,5 * 1/5 que salen completos al azar
+
+
+def test_otra_resolucion():
+    # docs/02: con Config.resolucion = 32 los tres modelos deben seguir funcionando
+    x = preparar_entrada(torch.zeros(2, 32, 32, dtype=torch.uint8))
+    for nombre in ("M1", "M2", "M2-P"):
+        assert crear_modelo(nombre, 0.0, resolucion=32)(x).shape == (2, 30)

@@ -30,9 +30,9 @@ Dimensiones de la CNN: 1×28×28 → 32×14×14 → 64×7×7 → 128×3×3 → G
 
 | Quieren… | Cambien… |
 |---|---|
-| Más o menos filtros | `CNN(filtros=(32, 64, 128))`. Si cambian el último, la capa final y los vectores de H4 cambian de tamaño solos. |
-| Un cuarto bloque | `filtros=(32, 64, 128, 256)`. Con 28×28 quedaría 256×1×1 al final, todavía válido. |
+| Más o menos filtros | El valor por defecto `filtros=(32, 64, 128)` de `CNN.__init__`. Si cambian el último, la capa final y los vectores de H4 cambian de tamaño solos. |
+| Un cuarto bloque | `filtros=(32, 64, 128, 256)` en el mismo lugar. Con 28×28 quedaría 256×1×1 al final, todavía válido. |
 | Otro dropout de M1 | `Config.m1_dropout` |
-| Un modelo nuevo (por ejemplo M3) | Una clase aquí, una rama en `crear_modelo` y su nombre en `entrenar_modelos(..., nombres=...)`. Las métricas y figuras aceptan cualquier nombre. |
+| Un modelo nuevo (por ejemplo M3) | Una clase aquí y una rama en `crear_modelo`. En el notebook, antes de entrenar: `hp["M3"] = hp["M2"]` (o su propia configuración) y `modelos.update(E.entrenar_modelos(cfg, D, hp, nombres=("M3",)))`. Se entrena con dibujos completos (como M2) salvo que lo cambien en `entrenar_o_cargar`. Métricas, curvas, figura por k y latencia lo incluyen solo; la Tabla 2 del paper (`tablas.modelos`) muestra solo M1, M2 y M2-P. Háganlo en `trabajo_pruebas` (`00_como_ejecutar.md`, sección 7). |
 
 Después de cambiar la arquitectura hay que borrar `trabajo/modelos/` y `trabajo/resultados/predicciones_*`: este cambio **no** se detecta solo.

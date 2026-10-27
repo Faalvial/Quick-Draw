@@ -116,7 +116,7 @@ def entrenar(nombre_modelo: str, cache_ent, cache_val, cfg: Config, *, esquema: 
     """
     epocas = epocas or cfg.epocas_max
     fijar_semilla(semilla)
-    modelo = crear_modelo(nombre_modelo, dropout).to(DISPOSITIVO)
+    modelo = crear_modelo(nombre_modelo, dropout, cfg.resolucion).to(DISPOSITIVO)
     if optimizador == "adam":
         opt = torch.optim.Adam(modelo.parameters(), lr=lr)
     elif optimizador == "sgd":
@@ -236,7 +236,7 @@ def entrenar_o_cargar(nombre: str, cache_ent, cache_val, cfg: Config, hp: dict, 
             "Si el cambio es a propósito, borren esa carpeta (y predicciones_*) para "
             "reentrenar. Ver docs/00_como_ejecutar.md.")
     if final.exists():
-        modelo = crear_modelo(nombre, hp["dropout"]).to(DISPOSITIVO)
+        modelo = crear_modelo(nombre, hp["dropout"], cfg.resolucion).to(DISPOSITIVO)
         modelo.load_state_dict(torch.load(final, map_location=DISPOSITIVO))
         historial = json.loads((carpeta / "historial.json").read_text())
         return modelo, historial

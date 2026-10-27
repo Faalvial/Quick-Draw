@@ -28,7 +28,7 @@ Para un dibujo con K trazos genera K imágenes de 28×28: la imagen k tiene solo
 | Quieren… | Cambien… |
 |---|---|
 | Trazo más fino o más grueso | `Config.grosor` (16 en el lienzo de 256 ≈ 1,75 px a 28×28) |
-| Otra resolución (por ejemplo 32×32) | `Config.resolucion`. La CNN se adapta sola (usa GAP); la MLP también (`resolucion * resolucion` entradas). |
+| Otra resolución (por ejemplo 32×32) | `Config.resolucion`. La CNN se adapta sola (usa GAP); la MLP recibe `resolucion * resolucion` entradas (`crear_modelo` le pasa la resolución). Lo comprueba `tests/test_modelos.py`. |
 | Ver cómo cambia la imagen | `figuras.prefijos(...)` en el notebook, sección 2 |
 | Comparar con la normalización no causal | Pasar `caja_ref=caja(trazos_completos)` a `rasterizar`. Solo para análisis; nunca para entrenar ni evaluar. |
 

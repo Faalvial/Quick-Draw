@@ -50,9 +50,9 @@ class CNN(nn.Module):
         return self.clasificador(self.dropout(self.vectores(x)))
 
 
-def crear_modelo(nombre: str, dropout: float) -> nn.Module:
+def crear_modelo(nombre: str, dropout: float, resolucion: int = 28) -> nn.Module:
     if nombre == "M1":
-        return MLP(dropout)
+        return MLP(dropout, resolucion)          # la CNN no la necesita: usa GAP
     if nombre in ("M2", "M2-P"):
         return CNN(dropout)
     raise ValueError(f"Modelo desconocido: {nombre}")

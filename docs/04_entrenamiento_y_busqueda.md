@@ -38,7 +38,7 @@ M2 y M2-P se entrenan con las semillas 0, 1 y 2; M1 solo con la 0 (`semillas_m1`
 
 - **M2-P hereda los hiperparámetros de M2.** Si cada uno tuviera su propia búsqueda, H2 compararía dos cosas a la vez (datos y configuración). Así cambia una sola.
 - **La búsqueda es corta (5 épocas, 30 %).** Sirve para ordenar las combinaciones, no para el resultado final. Es la respuesta a "¿por qué esos valores?" en la exposición.
-- **Parada temprana de M2-P con la AUC.** *Esto difiere un poco del plan v5,* que dice "exactitud de validación" para todos. M2-P se entrena para acertar temprano; si se detuviera mirando solo el dibujo completo, podría quedarse con una época que acierta al final pero no antes. Si el grupo prefiere seguir el plan al pie de la letra, en `entrenar_o_cargar` cambien `("prefijos", "auc")` por `("prefijos", "final")`.
+- **Parada temprana de M2-P con la AUC.** *Esto difiere un poco del plan v5,* que dice "exactitud de validación" para todos. M2-P se entrena para acertar temprano; si se detuviera mirando solo el dibujo completo, podría quedarse con una época que acierta al final pero no antes. Si el grupo prefiere seguir el plan al pie de la letra, en `entrenar_o_cargar` cambien `(cfg.esquema_m2p, "auc")` por `(cfg.esquema_m2p, "final")`. Es un cambio de código: no se detecta solo, así que borren antes `trabajo/modelos/M2-P_s*` y `trabajo/resultados/predicciones_*`.
 - **Calendario coseno y AMP.** No estaban en el plan; son prácticas estándar que estabilizan el final del entrenamiento y ahorran GPU. Para quitarlos, borren `sched.step()` o pongan `usar_amp = False`.
 - **"Quien entrena no evalúa".** Este módulo solo entrena y predice; todas las métricas salen de `metricas.py`.
 
@@ -50,7 +50,7 @@ M2 y M2-P se entrenan con las semillas 0, 1 y 2; M1 solo con la 0 (`semillas_m1`
 | Más épocas o más paciencia | `epocas_max`, `paciencia` |
 | M1 con 3 semillas (si sobra tiempo) | `semillas_m1=(0, 1, 2)` |
 | Entrenar solo un modelo | `E.entrenar_modelos(cfg, D, hp, nombres=("M2-P",))` |
-| Elegir hiperparámetros a mano | Editen el diccionario `hp` en el notebook antes de `entrenar_modelos` |
+| Elegir hiperparámetros a mano | Editen el diccionario `hp` en el notebook antes de `entrenar_modelos`; si cambian `hp["M2"]`, cambien también `hp["M2-P"]` (debe heredar la misma) |
 
 ### Si H2 falla porque M2-P pierde exactitud final
 
