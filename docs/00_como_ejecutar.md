@@ -4,12 +4,22 @@ Este documento explica cómo correr todo, qué se guarda, cómo retomar cuando C
 
 ## 1. Preparar Drive (una sola vez)
 
-1. Descompriman `quickdraw-early.zip` y suban la carpeta completa a **Mi unidad**, de modo que quede `MyDrive/quickdraw-early/`.
-2. Descompriman `muestra_30.zip` (unos 62 MB) dentro de `MyDrive/quickdraw-early/datos/`, de modo que quede `MyDrive/quickdraw-early/datos/muestra_30/cat.ndjson.gz` y los demás.
-   - Si no suben la muestra, el notebook la descarga sola con `datos/download_sample.py`, pero recorre los archivos completos de las 30 categorías y puede tardar alrededor de una hora.
-3. Si otra persona del grupo va a usar la misma carpeta: compártanla y, desde su cuenta, *clic derecho → Organizar → Agregar acceso directo a Mi unidad*. La ruta tiene que quedar igual: `MyDrive/quickdraw-early`.
+El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra_30`, 62 MB) y los modelos y resultados de la corrida de referencia (`trabajo/`, ver la sección 9).
 
-Si prefieren otra ruta, cambien `RAIZ` en la primera celda del notebook.
+1. Una persona del grupo abre un notebook en blanco en Colab y clona el repositorio dentro de Drive:
+
+   ```python
+   from google.colab import drive
+   drive.mount("/content/drive")
+   !git clone https://github.com/Faalvial/Quick-Draw.git /content/drive/MyDrive/quickdraw-early
+   ```
+
+2. Comparte la carpeta `quickdraw-early` con el grupo. Cada integrante, desde su cuenta: *clic derecho → Organizar → Agregar acceso directo a Mi unidad*. La ruta tiene que quedar igual: `MyDrive/quickdraw-early`.
+3. Para traer cambios nuevos del repositorio: `!git -C /content/drive/MyDrive/quickdraw-early pull`.
+
+Si prefieren otra ruta, cambien `RAIZ` en la primera celda del notebook. Si borran `datos/muestra_30`, el notebook la vuelve a descargar con `datos/download_sample.py` (unos minutos; sale idéntica por la semilla 2026).
+
+**Fuera de Colab** basta con `git clone` y la sección 8.
 
 ## 2. Primera prueba: modo rápido
 
