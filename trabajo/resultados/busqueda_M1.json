@@ -1,0 +1,74 @@
+[
+ {
+  "hp": {
+   "optimizador": "adam",
+   "lr": 0.003,
+   "dropout": 0.3
+  },
+  "val_exactitud": 0.6492,
+  "epocas": 5,
+  "contexto": {
+   "dibujos_por_categoria": 10000,
+   "resolucion": 28,
+   "lienzo": 256,
+   "grosor": 16,
+   "margen": 2,
+   "semilla_particion": 2026,
+   "proporciones": [
+    0.7,
+    0.15,
+    0.15
+   ],
+   "epocas": 5,
+   "fraccion_datos": 0.3
+  }
+ },
+ {
+  "hp": {
+   "optimizador": "adam",
+   "lr": 0.001,
+   "dropout": 0.3
+  },
+  "val_exactitud": 0.6226222222222222,
+  "epocas": 5,
+  "contexto": {
+   "dibujos_por_categoria": 10000,
+   "resolucion": 28,
+   "lienzo": 256,
+   "grosor": 16,
+   "margen": 2,
+   "semilla_particion": 2026,
+   "proporciones": [
+    0.7,
+    0.15,
+    0.15
+   ],
+   "epocas": 5,
+   "fraccion_datos": 0.3
+  }
+ },
+ {
+  "hp": {
+   "optimizador": "adam",
+   "lr": 0.0003,
+   "dropout": 0.3
+  },
+  "val_exactitud": 0.5483555555555556,
+  "epocas": 5,
+  "contexto": {
+   "dibujos_por_categoria": 10000,
+   "resolucion": 28,
+   "lienzo": 256,
+   "grosor": 16,
+   "margen": 2,
+   "semilla_particion": 2026,
+   "proporciones": [
+    0.7,
+    0.15,
+    0.15
+   ],
+   "epocas": 5,
+   "fraccion_datos": 0.3
+  }
+ }
+]

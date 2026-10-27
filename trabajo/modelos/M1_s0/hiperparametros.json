@@ -1,0 +1,20 @@
+{
+ "optimizador": "adam",
+ "lr": 0.003,
+ "dropout": 0.3,
+ "dibujos_por_categoria": 10000,
+ "resolucion": 28,
+ "lienzo": 256,
+ "grosor": 16,
+ "margen": 2,
+ "semilla_particion": 2026,
+ "proporciones": [
+  0.7,
+  0.15,
+  0.15
+ ],
+ "lote": 256,
+ "epocas_max": 20,
+ "paciencia": 3,
+ "dibujos_val_auc": 3000
+}

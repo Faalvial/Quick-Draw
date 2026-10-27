@@ -1,0 +1,122 @@
+[
+ {
+  "epoca": 1,
+  "perdida": 1.6442452009836832,
+  "validacion": 0.6190888888888889,
+  "segundos": 9.3
+ },
+ {
+  "epoca": 2,
+  "perdida": 1.3746300985972086,
+  "validacion": 0.6428444444444444,
+  "segundos": 10.2
+ },
+ {
+  "epoca": 3,
+  "perdida": 1.2966443967728387,
+  "validacion": 0.6622222222222223,
+  "segundos": 11.1
+ },
+ {
+  "epoca": 4,
+  "perdida": 1.242626780319214,
+  "validacion": 0.6628888888888889,
+  "segundos": 10.0
+ },
+ {
+  "epoca": 5,
+  "perdida": 1.2042539707093012,
+  "validacion": 0.6705111111111111,
+  "segundos": 10.0
+ },
+ {
+  "epoca": 6,
+  "perdida": 1.1670742737361364,
+  "validacion": 0.6777111111111112,
+  "segundos": 11.9
+ },
+ {
+  "epoca": 7,
+  "perdida": 1.1326431621914819,
+  "validacion": 0.6814222222222223,
+  "segundos": 10.2
+ },
+ {
+  "epoca": 8,
+  "perdida": 1.0963053293591454,
+  "validacion": 0.6879777777777778,
+  "segundos": 10.6
+ },
+ {
+  "epoca": 9,
+  "perdida": 1.064703938456944,
+  "validacion": 0.6982888888888888,
+  "segundos": 11.0
+ },
+ {
+  "epoca": 10,
+  "perdida": 1.0315159300122942,
+  "validacion": 0.7006444444444444,
+  "segundos": 10.4
+ },
+ {
+  "epoca": 11,
+  "perdida": 1.00162044728597,
+  "validacion": 0.7035111111111111,
+  "segundos": 9.8
+ },
+ {
+  "epoca": 12,
+  "perdida": 0.9713540617170788,
+  "validacion": 0.7117333333333333,
+  "segundos": 9.9
+ },
+ {
+  "epoca": 13,
+  "perdida": 0.9424903867857797,
+  "validacion": 0.7141333333333333,
+  "segundos": 10.0
+ },
+ {
+  "epoca": 14,
+  "perdida": 0.9182211904344104,
+  "validacion": 0.7136444444444444,
+  "segundos": 10.9
+ },
+ {
+  "epoca": 15,
+  "perdida": 0.8941835031827291,
+  "validacion": 0.7184,
+  "segundos": 9.8
+ },
+ {
+  "epoca": 16,
+  "perdida": 0.8771297820954096,
+  "validacion": 0.7204666666666667,
+  "segundos": 10.8
+ },
+ {
+  "epoca": 17,
+  "perdida": 0.8561633334023612,
+  "validacion": 0.7220222222222222,
+  "segundos": 10.6
+ },
+ {
+  "epoca": 18,
+  "perdida": 0.8417919867061433,
+  "validacion": 0.7226888888888889,
+  "segundos": 9.6
+ },
+ {
+  "epoca": 19,
+  "perdida": 0.8363113918576922,
+  "validacion": 0.7241111111111111,
+  "segundos": 10.3
+ },
+ {
+  "epoca": 20,
+  "perdida": 0.8304539360500517,
+  "validacion": 0.724,
+  "segundos": 9.9
+ }
+]

@@ -1,0 +1,17 @@
+{
+ "M1": {
+  "optimizador": "adam",
+  "lr": 0.003,
+  "dropout": 0.3
+ },
+ "M2": {
+  "optimizador": "adam",
+  "lr": 0.003,
+  "dropout": 0.0
+ },
+ "M2-P": {
+  "optimizador": "adam",
+  "lr": 0.003,
+  "dropout": 0.0
+ }
+}

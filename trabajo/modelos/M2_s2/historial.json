@@ -1,0 +1,122 @@
+[
+ {
+  "epoca": 1,
+  "perdida": 1.0559266272862753,
+  "validacion": 0.7519333333333333,
+  "segundos": 130.6
+ },
+ {
+  "epoca": 2,
+  "perdida": 0.6563291298139663,
+  "validacion": 0.7782444444444444,
+  "segundos": 129.9
+ },
+ {
+  "epoca": 3,
+  "perdida": 0.5755047294934591,
+  "validacion": 0.7813555555555556,
+  "segundos": 137.0
+ },
+ {
+  "epoca": 4,
+  "perdida": 0.5269298786572048,
+  "validacion": 0.8145111111111111,
+  "segundos": 139.9
+ },
+ {
+  "epoca": 5,
+  "perdida": 0.492268286725453,
+  "validacion": 0.8048666666666666,
+  "segundos": 133.6
+ },
+ {
+  "epoca": 6,
+  "perdida": 0.4619070093836103,
+  "validacion": 0.8155555555555556,
+  "segundos": 133.6
+ },
+ {
+  "epoca": 7,
+  "perdida": 0.4372181503999801,
+  "validacion": 0.8198888888888889,
+  "segundos": 132.4
+ },
+ {
+  "epoca": 8,
+  "perdida": 0.4137617144811721,
+  "validacion": 0.8240666666666666,
+  "segundos": 134.1
+ },
+ {
+  "epoca": 9,
+  "perdida": 0.3910676320598239,
+  "validacion": 0.8250888888888889,
+  "segundos": 139.8
+ },
+ {
+  "epoca": 10,
+  "perdida": 0.3698617061387925,
+  "validacion": 0.8260222222222222,
+  "segundos": 140.0
+ },
+ {
+  "epoca": 11,
+  "perdida": 0.3502107866786775,
+  "validacion": 0.832,
+  "segundos": 138.0
+ },
+ {
+  "epoca": 12,
+  "perdida": 0.3311812939825512,
+  "validacion": 0.8301777777777778,
+  "segundos": 144.8
+ },
+ {
+  "epoca": 13,
+  "perdida": 0.3131763082140968,
+  "validacion": 0.8306444444444444,
+  "segundos": 135.5
+ },
+ {
+  "epoca": 14,
+  "perdida": 0.2978895261355809,
+  "validacion": 0.8328666666666666,
+  "segundos": 134.4
+ },
+ {
+  "epoca": 15,
+  "perdida": 0.28346469014939807,
+  "validacion": 0.8334222222222222,
+  "segundos": 136.8
+ },
+ {
+  "epoca": 16,
+  "perdida": 0.2703272855395362,
+  "validacion": 0.8324888888888888,
+  "segundos": 139.4
+ },
+ {
+  "epoca": 17,
+  "perdida": 0.26032267556871685,
+  "validacion": 0.8340222222222222,
+  "segundos": 131.8
+ },
+ {
+  "epoca": 18,
+  "perdida": 0.252247110421317,
+  "validacion": 0.8338666666666666,
+  "segundos": 131.6
+ },
+ {
+  "epoca": 19,
+  "perdida": 0.24699276682762872,
+  "validacion": 0.8342888888888889,
+  "segundos": 133.4
+ },
+ {
+  "epoca": 20,
+  "perdida": 0.24406837701797485,
+  "validacion": 0.8348888888888889,
+  "segundos": 134.8
+ }
+]

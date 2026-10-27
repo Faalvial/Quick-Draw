@@ -1,0 +1,31 @@
+categoria,grupo,dibujos,mediana_trazos,menos_de_3_trazos,pais_mas_frecuente,porcentaje_pais
+cat,par,10000,9.0,36,US,39.1
+dog,par,10000,7.0,1176,US,44.1
+lion,par,10000,6.0,914,US,39.5
+tiger,par,10000,12.0,224,US,42.9
+horse,par,10000,6.0,2428,US,38.5
+zebra,par,10000,9.0,272,US,39.0
+violin,par,10000,4.0,2449,US,41.6
+cello,par,10000,5.0,696,US,44.0
+bear,par,10000,6.0,1013,US,42.6
+panda,par,10000,7.0,84,US,40.6
+The Mona Lisa,azar,10000,8.0,96,US,41.3
+alarm clock,azar,10000,7.0,70,US,40.6
+bird,azar,10000,6.0,1449,US,41.0
+brain,azar,10000,7.0,972,US,41.6
+bridge,azar,10000,6.0,689,US,44.1
+bus,azar,10000,7.0,62,US,37.6
+calculator,azar,10000,7.0,220,US,44.6
+fireplace,azar,10000,5.0,888,US,49.4
+frog,azar,10000,6.0,774,US,41.3
+jail,azar,10000,6.0,32,US,45.6
+map,azar,10000,6.0,792,US,44.7
+remote control,azar,10000,6.0,814,US,44.2
+scorpion,azar,10000,8.0,587,US,37.9
+sink,azar,10000,6.0,239,US,45.9
+stop sign,azar,10000,7.0,163,US,48.7
+sun,azar,10000,8.0,689,US,42.8
+teddy-bear,azar,10000,8.0,350,US,39.4
+lobster,azar,10000,8.0,552,US,44.5
+whale,azar,10000,5.0,1569,US,45.0
+yoga,azar,10000,5.0,400,US,40.8
