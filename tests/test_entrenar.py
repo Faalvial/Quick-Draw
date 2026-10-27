@@ -36,3 +36,15 @@ def test_reanudar_tras_un_corte_da_lo_mismo(tmp_path, monkeypatch):
     _, con_corte = T.entrenar("M2", ent, val, cfg, ruta=tmp_path / "b", **kw)
 
     assert [h["perdida"] for h in con_corte] == [h["perdida"] for h in sin_corte]
+
+
+def test_modelos_con_otros_datos_detienen_antes_de_la_busqueda(tmp_path):
+    import json
+    from dataclasses import replace
+    cfg = Config(ruta_trabajo=tmp_path)
+    carpeta = tmp_path / "modelos" / "M2_s0"
+    carpeta.mkdir(parents=True)
+    (carpeta / "hiperparametros.json").write_text(json.dumps(T.huella_datos(cfg)))
+    T.verificar_modelos_guardados(cfg)                       # mismos datos: sigue
+    with pytest.raises(RuntimeError, match="grosor"):
+        T.verificar_modelos_guardados(replace(cfg, grosor=10))

@@ -15,7 +15,8 @@ import torch
 from . import analisis, datos, figuras, hipotesis, metricas, tablas
 from .config import FRACCIONES, PARES, Config
 from .entrenar import (DISPOSITIVO, busqueda, entrenar_o_cargar, mejor_combinacion,
-                       predecir, rejilla_m1, rejilla_m2, ruta_modelo)
+                       predecir, rejilla_m1, rejilla_m2, ruta_modelo,
+                       verificar_modelos_guardados)
 from .raster import indices_completos, obtener_cache
 from .tablas import ORDEN_MODELOS
 
@@ -48,6 +49,7 @@ def preparar_datos(cfg: Config, procesos: int = 2):
 # --- 2. Búsqueda de hiperparámetros -------------------------------------------------
 
 def buscar_hiperparametros(cfg: Config, D):
+    verificar_modelos_guardados(cfg)          # antes de gastar tiempo en la búsqueda
     ent, val = D["caches"]["entrenamiento"], D["caches"]["validacion"]
     filas_m2 = busqueda("M2", ent, val, cfg, rejilla_m2(cfg))
     filas_m1 = busqueda("M1", ent, val, cfg, rejilla_m1(cfg))

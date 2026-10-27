@@ -210,6 +210,22 @@ def huella_datos(cfg: Config) -> dict:
             "semilla_particion": cfg.semilla_particion, "proporciones": list(cfg.proporciones)}
 
 
+def verificar_modelos_guardados(cfg: Config):
+    """Detiene todo ANTES de la búsqueda si hay modelos guardados con otros datos
+    (otra rasterización, otros dibujos por categoría u otra partición). Sin esto,
+    la búsqueda se rehacía entera (~0,4 h) y recién después avisaba."""
+    for ruta_hp in sorted(Path(cfg.ruta_modelos).glob("*/hiperparametros.json")):
+        guardada = json.loads(ruta_hp.read_text())
+        distinto = {k: {"guardado": guardada.get(k), "actual": v}
+                    for k, v in huella_datos(cfg).items() if guardada.get(k) != v}
+        if distinto:
+            raise RuntimeError(
+                f"{ruta_hp.parent} se entrenó con otros datos: {distinto}.\n"
+                "Si el cambio es a propósito, borren trabajo/modelos/ y "
+                "trabajo/resultados/predicciones_* (o usen CARPETA_TRABAJO = "
+                "\"trabajo_pruebas\"). Ver docs/00_como_ejecutar.md.")
+
+
 def huella_modelo(cfg: Config, hp: dict) -> dict:
     """Hiperparámetros + datos + reglas de entrenamiento de un modelo guardado."""
     return {**hp, **huella_datos(cfg), "lote": cfg.lote, "epocas_max": cfg.epocas_max,

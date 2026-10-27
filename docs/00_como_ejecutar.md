@@ -84,7 +84,7 @@ El código protege contra la mezcla de resultados viejos y nuevos:
 
 | Si cambian… | Qué pasa |
 |---|---|
-| Rasterización (`resolucion`, `grosor`, `margen`, `lienzo`), `dibujos_por_categoria` o `semilla_particion` | Se crea una caché nueva (el nombre del archivo lleva esos valores). Los modelos guardados ya no coinciden y el notebook **se detiene con un mensaje**: borren `trabajo/modelos/` y `trabajo/resultados/predicciones_*`. |
+| Rasterización (`resolucion`, `grosor`, `margen`, `lienzo`), `dibujos_por_categoria` o `semilla_particion` | Se crea una caché nueva (el nombre del archivo lleva esos valores). Los modelos guardados ya no coinciden y el notebook **se detiene con un mensaje** al empezar la búsqueda (antes de gastar tiempo): borren `trabajo/modelos/` y `trabajo/resultados/predicciones_*`. |
 | La rejilla de búsqueda | Solo se prueban las combinaciones nuevas; las que salieron de la rejilla se ignoran. |
 | Hiperparámetros, `lote`, `epocas_max`, `paciencia` | El notebook se detiene con un mensaje que muestra la configuración guardada y la actual. Borren la carpeta del modelo que quieren reentrenar. |
 | La arquitectura (`quickdraw/modelos.py`) o la forma de entrenar (`quickdraw/entrenar.py`) | **Esto no se detecta solo.** Borren `trabajo/modelos/` y `trabajo/resultados/predicciones_*`. |
