@@ -1,0 +1,24 @@
+# Python y Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Lo que se regenera solo (ver docs/00_como_ejecutar.md)
+# - prefijos rasterizados (~1,5 GB)
+trabajo*/cache/
+# - checkpoint por época: solo sirve para retomar; modelo.pt sí se sube
+trabajo*/modelos/*/checkpoint.pt
+# - modo rápido: solo comprueba que todo corre
+trabajo_rapido/
+# - experimentos de la sección "Modificar" de la guía de dominio
+trabajo_pruebas/
+
+# LaTeX
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.pdf
