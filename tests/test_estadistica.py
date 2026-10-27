@@ -39,3 +39,6 @@ def test_tablas_latex(tmp_path):
     r = [{"hipotesis": "H1", "veredicto": "confirmada",
           "por_semilla": [{"caida_puntos": 12.34}, {"caida_puntos": 11.0}]}]
     assert "12,3; 11,0" in tablas.hipotesis(r, tmp_path / "h.tex")
+    r2 = [{"hipotesis": "H2", "veredicto": "refutada",
+           "por_semilla": [{"ic_inf": 0.072, "caida_final_puntos": 1.81}]}]
+    assert "0,072 / 1,8" in tablas.hipotesis(r2, tmp_path / "h2.tex")      # las dos condiciones

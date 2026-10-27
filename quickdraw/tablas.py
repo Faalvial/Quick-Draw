@@ -60,13 +60,20 @@ def modelos(metricas: pd.DataFrame, ruta, grupo: str = "todas"):
 
 
 def hipotesis(resultados, ruta):
-    """Tabla de hipótesis: el valor que decide cada criterio, por semilla, y el veredicto."""
-    claves = {"H1": ("caida_puntos", "caída (pts)", 1), "H2": ("ic_inf", "IC inf. $\\Delta$AUC", 3),
-              "H4": ("rho", "$\\rho$", 2), "H5": ("ic_inf", "IC inf. prop.", 3)}
+    """Tabla de hipótesis: los valores que deciden cada criterio, por semilla, y el veredicto.
+
+    H2 tiene dos condiciones (AUC y exactitud final): se muestran las dos, para que
+    un "refutada" con el IC de la AUC por encima de 0 no parezca una contradicción.
+    """
+    claves = {"H1": [("caida_puntos", 1)], "H2": [("ic_inf", 3), ("caida_final_puntos", 1)],
+              "H4": [("rho", 2)], "H5": [("ic_inf", 3)]}
+    nombres = {"H1": "caída (pts)", "H2": "IC inf. $\\Delta$AUC / caída final (pts)",
+               "H4": "$\\rho$", "H5": "IC inf. prop."}
     filas = []
     for r in resultados:
-        clave, nombre, dec = claves[r["hipotesis"]]
-        valores = "; ".join(_num(f[clave], dec) for f in r["por_semilla"])
+        nombre = nombres[r["hipotesis"]]
+        valores = "; ".join(" / ".join(_num(f[c], dec) for c, dec in claves[r["hipotesis"]])
+                            for f in r["por_semilla"])
         filas.append(f"{r['hipotesis']} & {nombre} & {valores} & {r['veredicto']} \\\\")
     texto = ("\\begin{tabular}{lllr}\n\\toprule\n"
              "Hip. & Criterio & Valor por semilla & Veredicto \\\\\n"
