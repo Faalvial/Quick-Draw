@@ -12,7 +12,11 @@ Se entrenan tres modelos sobre 30 categorías de Quick, Draw! (5 pares confundib
 
 ## Empezar
 
-Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: suban esta carpeta y `muestra_30` a `MyDrive/quickdraw-early/`, abran `notebooks/proyecto_quickdraw.ipynb` en Colab con GPU y ejecuten todo; primero con `MODO_RAPIDO = True` para comprobar que corre.
+Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: clonen el repositorio en `MyDrive/quickdraw-early/` (sección 1), abran `notebooks/proyecto_quickdraw.ipynb` en Colab y ejecuten todo; primero con `MODO_RAPIDO = True` para comprobar que corre (un par de minutos).
+
+El repositorio trae la muestra de datos (`datos/muestra_30`) y la **corrida oficial ya hecha** en `trabajo/`: búsqueda de hiperparámetros, M1, M2 y M2-P con sus semillas, predicciones, métricas, hipótesis, figuras y tablas LaTeX, todo en **validación** (resumen en la sección 10 de `docs/00`). El conjunto de prueba sigue bloqueado hasta la semana 13. Con la corrida hecha, "Ejecutar todas" no entrena nada: solo carga y evalúa.
+
+[![pruebas](https://github.com/Faalvial/Quick-Draw/actions/workflows/pruebas.yml/badge.svg)](https://github.com/Faalvial/Quick-Draw/actions/workflows/pruebas.yml) En cada push, GitHub corre las pruebas automáticas y el notebook en modo rápido.
 
 ## Estructura
 
@@ -30,6 +34,9 @@ Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: suban e
 | `demo/demo.py`, `notebooks/demo.ipynb` | Demo en Gradio | [08](docs/08_demo.md) | Jorly |
 | `quickdraw/experimentos.py` | Las etapas que llama el notebook | [00](docs/00_como_ejecutar.md) | — |
 | `tests/` | Pruebas automáticas (`pytest tests`) | — | — |
+| `datos/muestra_30/` | La muestra: 10 000 reconocidos y 1 000 no reconocidos por categoría | [01](docs/01_datos.md) | Elias |
+| `trabajo/` | La corrida oficial (modelos y resultados en validación) | [00](docs/00_como_ejecutar.md) | — |
+| `paper/` | Plantilla del paper (IEEE), solo estructura | `paper/README.md` | Farid |
 
 ## Hipótesis
 
@@ -45,6 +52,10 @@ Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: suban e
 - Semilla de la muestra y de las particiones: 2026. Los `key_id` de cada partición se guardan en `trabajo/resultados/particiones/`.
 - Semillas de entrenamiento: 0, 1 y 2.
 - El conjunto de prueba se usa una sola vez (semana 13), cambiando `USAR_PRUEBA` a `True`.
+
+## Datos
+
+La muestra de `datos/muestra_30/` sale de *The Quick, Draw! Dataset* de Google Creative Lab, que se distribuye bajo la licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Detalles en [`datos/muestra_30/README.md`](datos/muestra_30/README.md).
 
 ## Uso de IA
 

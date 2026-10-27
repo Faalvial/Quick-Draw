@@ -32,16 +32,18 @@ El modo rápido (`config_rapida` en `quickdraw/config.py`) usa 120 dibujos por c
 
 ## 3. La corrida real
 
-Vuelvan a poner `MODO_RAPIDO = False` y ejecuten todo. El notebook avanza por etapas:
+**La corrida oficial ya está hecha y viene en el repositorio** (`trabajo/`, ver la sección 10). Con `MODO_RAPIDO = False`, "Ejecutar todas" no entrena nada: carga la búsqueda, los modelos y las predicciones, y rehace métricas, hipótesis, figuras y tablas en validación. La primera vez en cada Drive también crea la caché de prefijos, que no se sube al repositorio. Si después de clonar el notebook recalcula alguna predicción, es normal (git no conserva qué archivo es más nuevo) y tarda unos minutos.
 
-| Etapa | Qué hace | Tiempo aproximado en Colab con T4 |
-|---|---|---|
-| Datos | Lee 300 000 dibujos y rasteriza sus ~2,2 millones de prefijos | 10 a 20 min la primera vez; luego se lee la caché |
-| Búsqueda | 12 combinaciones de M2 y 3 de M1, con 5 épocas y el 30 % de los datos | ~0,4 h |
-| Entrenamiento | M1 (1 semilla), M2 y M2-P (3 semillas cada uno), hasta 20 épocas | ~2,2 h |
-| Evaluación | Métricas, hipótesis y figuras en validación | Unos minutos |
+Tiempos medidos en la corrida oficial (CPU de 4 núcleos, sin GPU, 27 de octubre de 2026):
 
-Los tiempos de GPU vienen de la estimación del plan v5 (~2,6 h en total) y del tiempo medido aquí en CPU; midan los suyos en la semana 9 y ajusten. La caché ocupa unos 1,5 GB en Drive (entrenamiento + validación) y cabe en la memoria de Colab.
+| Etapa | Qué hace | Tiempo medido en CPU | En Colab |
+|---|---|---|---|
+| Datos | Lee 300 000 dibujos y rasteriza sus 1,87 millones de prefijos (entrenamiento + validación) | 6 min con 4 procesos | 10 a 20 min la primera vez (2 procesos); luego se lee la caché |
+| Búsqueda | 12 combinaciones de M2 y 3 de M1, con 5 épocas y el 30 % de los datos | 64 min | ya hecha: solo se lee |
+| Entrenamiento | M1 (1 semilla), M2 y M2-P (3 semillas cada uno), hasta 20 épocas | 3 h 33 min (~135 s por época de M2 o M2-P; ~10 s de M1) | ya hecho: solo se carga |
+| Evaluación | Métricas, hipótesis y figuras en validación | 14 min la primera vez; ~3 min con las predicciones guardadas | unos minutos |
+
+En total, 4 h 57 min. La caché ocupa unos 1,5 GB en Drive y la corrida usó unos 4,6 GB de RAM: cabe en Colab. Si reentrenan algo en una T4, será más rápido que en CPU (AMP se activa solo con GPU).
 
 **Repartir el trabajo entre cuentas.** Cada modelo y cada semilla se guardan en su propia carpeta, así que dos personas pueden entrenar a la vez sobre la misma carpeta compartida sin pisarse. Por ejemplo, en una cuenta:
 
@@ -49,7 +51,7 @@ Los tiempos de GPU vienen de la estimación del plan v5 (~2,6 h en total) y del 
 modelos = E.entrenar_modelos(cfg, D, hp, nombres=("M2",))
 ```
 
-y en la otra `nombres=("M2-P",)`. Al final, una sola persona ejecuta todo el notebook: los modelos ya entrenados solo se cargan.
+y en la otra `nombres=("M2-P",)`. Solo hace falta si reentrenan (por ejemplo, el esquema mixto de `04_entrenamiento_y_busqueda.md`). Al final, una sola persona ejecuta todo el notebook: los modelos ya entrenados solo se cargan.
 
 ## 4. Retomar cuando Colab corta la sesión
 
@@ -127,6 +129,13 @@ cd notebooks && jupyter notebook proyecto_quickdraw.ipynb
 
 Fuera de Colab, el notebook usa como raíz la carpeta de arriba de `notebooks/` (o la variable de entorno `QD_RAIZ`). Las pruebas automáticas se ejecutan desde la raíz del repositorio con `pytest tests`.
 
-## 10. Resultados de la verificación (no son del proyecto)
+## 10. La corrida oficial (`trabajo/`)
 
-Para comprobar que el código aprende, se hizo una corrida mediana en CPU: 1 000 dibujos por categoría, 4 épocas y 1 semilla. Exactitud final: M1 0,52, M2 0,69 y M2-P 0,63. AUC progresiva: 0,39, 0,50 y 0,53. Con tan poco entrenamiento estos números **no sirven para el paper**; solo muestran que el orden esperado aparece. En esa corrida H2 salió refutada porque M2-P perdió 5,8 puntos de exactitud final; en `04_entrenamiento_y_busqueda.md` hay una modificación posible si eso se repite en la corrida real.
+Hecha el 27 de octubre de 2026 en CPU, con la configuración por defecto de `config.py` (grosor 16, margen 2) y **solo validación**: el conjunto de prueba no se tocó (`USAR_PRUEBA = False`). Está en el repositorio: `trabajo/modelos/` (pesos, historial e hiperparámetros de cada modelo) y `trabajo/resultados/` (búsqueda, particiones, predicciones, métricas, hipótesis, figuras y tablas LaTeX).
+
+- **Búsqueda.** M2: Adam, η = 0,003, sin dropout (79,0 % en validación; la mejor con SGD, 57,6 %). M1: Adam, η = 0,003. M2-P hereda la de M2. La tasa elegida es la más alta de la rejilla.
+- **Modelos** (validación, todas las categorías, media ± desviación de 3 semillas): exactitud final M1 72,4 %, M2 82,7 ± 1,2 %, M2-P 81,0 ± 0,6 %; AUC progresiva 0,520, 0,611 ± 0,018 y 0,695 ± 0,004.
+- **Hipótesis en validación:** H1, H4 y H5 confirmadas en las tres semillas; **H2 refutada**: M2-P gana AUC en las tres (límite inferior del IC entre 0,072 y 0,097) pero pierde 1,8, 0,9 y 2,2 puntos de exactitud final, y el criterio permite 1. Ver "Si H2 falla" en `04_entrenamiento_y_busqueda.md`.
+- **Parada temprana.** M2 con la semilla 1 se detuvo en la época 6 (mejor época, la 3) y quedó en 81,3 %, frente a 83,3 % y 83,5 % de las otras dos. Es la única semilla en la que H2 se cumple.
+
+Los resultados de **prueba** se generan una sola vez, en la semana 13 (sección 8).
