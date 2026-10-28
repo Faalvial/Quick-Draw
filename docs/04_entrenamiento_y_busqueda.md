@@ -57,3 +57,13 @@ M2 y M2-P se entrenan con las semillas 0, 1 y 2; M1 solo con la 0 (`semillas_m1`
 En la corrida oficial (validación, `00_como_ejecutar.md`, sección 10) pasó justo esto: M2-P ganó entre 0,074 y 0,100 de AUC progresiva, pero perdió 1,8, 0,9 y 2,2 puntos de exactitud final con las semillas 0, 1 y 2; el criterio de H2 permite 1, así que H2 queda refutada. Si el grupo decide modificar el método, una opción razonable es **mezclar dibujos completos** en el entrenamiento de M2-P: por ejemplo, con probabilidad 0,5 usar el dibujo completo y si no un prefijo al azar. Ya está implementado: en el notebook, al crear `cfg`, agreguen `esquema_m2p="mixto"` (y si quieren otra proporción, `m2p_prob_completo=0.3`). Para reentrenar M2-P, borren antes `trabajo/modelos/M2-P_s*` y `trabajo/resultados/predicciones_*` o el notebook se detiene avisando que la configuración cambió. Conviene probarlo primero en `trabajo_pruebas` (`00_como_ejecutar.md`, sección 7). En CPU, las tres semillas de M2-P tardaron unas 2 h; en una T4, menos.
 
 Es un cambio de método: debe decidirse con los resultados de **validación** (nunca de prueba) y declararse en el paper.
+
+### Decisión sobre H2 (fijada el 28 de octubre de 2026, antes de entrenar el esquema mixto)
+
+Con el esquema original, M2-P perdió más de 1 punto de exactitud final en validación. Se aplica el plan B que el plan v5 ya preveía para ese caso, con esta regla, escrita **antes** de ver ningún resultado del esquema mixto:
+
+1. **Qué se prueba.** Solo el esquema mixto con `m2p_prob_completo = 0.5`, el valor que ya estaba en `config.py` antes de la corrida oficial. No se prueba ninguna otra proporción ni otro cambio.
+2. **Cómo.** M2-P mixto con las semillas 0, 1 y 2, los mismos hiperparámetros (heredados de M2), las mismas particiones y la misma parada temprana con la AUC. Se evalúa solo en **validación**.
+3. **Regla para adoptarlo.** El esquema mixto pasa a ser el M2-P oficial si cumple el criterio de H2 **en las tres semillas** (límite inferior del IC 95 % de la diferencia de AUC > 0 y caída de exactitud final ≤ 1 punto). Si no lo cumple, se mantiene el esquema original y H2 se reporta refutada.
+4. **Qué se reporta.** En los dos casos, el paper reporta los resultados de validación de **ambos** esquemas y dice que el cambio se decidió con esta regla, antes de la prueba. Si se adopta el mixto, H4 y H5 se reevalúan con él, porque también usan M2-P.
+5. **La prueba.** En la semana 13 se evalúa solo el M2-P oficial. El otro esquema queda guardado en `trabajo/alternativas/` para el paper y no se evalúa en prueba.
