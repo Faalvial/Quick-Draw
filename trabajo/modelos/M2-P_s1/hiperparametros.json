@@ -16,5 +16,7 @@
  "lote": 256,
  "epocas_max": 20,
  "paciencia": 3,
- "dibujos_val_auc": 3000
+ "dibujos_val_auc": 3000,
+ "esquema": "mixto",
+ "prob_completo": 0.5
 }

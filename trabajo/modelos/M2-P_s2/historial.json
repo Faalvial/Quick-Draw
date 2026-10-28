@@ -1,122 +1,122 @@
 [
  {
   "epoca": 1,
-  "perdida": 1.712651391428993,
-  "validacion": 0.5983580424039535,
-  "segundos": 127.6
+  "perdida": 1.4338300330025808,
+  "validacion": 0.5905667144906743,
+  "segundos": 106.1
  },
  {
   "epoca": 2,
-  "perdida": 1.326956692032587,
-  "validacion": 0.618364418938307,
-  "segundos": 127.5
+  "perdida": 1.0418336931682768,
+  "validacion": 0.6175673521441096,
+  "segundos": 98.0
  },
  {
   "epoca": 3,
-  "perdida": 1.2405286792936778,
-  "validacion": 0.6437709230033476,
-  "segundos": 131.0
+  "perdida": 0.9623855550675166,
+  "validacion": 0.6387892555396143,
+  "segundos": 99.8
  },
  {
   "epoca": 4,
-  "perdida": 1.1894358644848777,
-  "validacion": 0.6386298421807747,
-  "segundos": 128.8
+  "perdida": 0.910695378453391,
+  "validacion": 0.6483939104096923,
+  "segundos": 99.5
  },
  {
   "epoca": 5,
-  "perdida": 1.1599297246842157,
-  "validacion": 0.6619639725809022,
-  "segundos": 128.9
+  "perdida": 0.8818011176608858,
+  "validacion": 0.6549497847919655,
+  "segundos": 102.6
  },
  {
   "epoca": 6,
-  "perdida": 1.1301971888678415,
-  "validacion": 0.6704527339391042,
-  "segundos": 125.6
+  "perdida": 0.8540563693909418,
+  "validacion": 0.6583373186673042,
+  "segundos": 101.2
  },
  {
   "epoca": 7,
-  "perdida": 1.1096673507009234,
-  "validacion": 0.6727642276422764,
-  "segundos": 128.4
+  "perdida": 0.8318414416994367,
+  "validacion": 0.6646341463414633,
+  "segundos": 98.1
  },
  {
   "epoca": 8,
-  "perdida": 1.0912715942382814,
-  "validacion": 0.6797983421010679,
-  "segundos": 129.8
+  "perdida": 0.8127925997961135,
+  "validacion": 0.6730631276901005,
+  "segundos": 103.9
  },
  {
   "epoca": 9,
-  "perdida": 1.076239642415728,
-  "validacion": 0.6769886816515225,
-  "segundos": 130.3
+  "perdida": 0.7950458924111866,
+  "validacion": 0.6717081141399649,
+  "segundos": 101.9
  },
  {
   "epoca": 10,
-  "perdida": 1.0572450591859364,
-  "validacion": 0.6793001753546947,
-  "segundos": 138.9
+  "perdida": 0.7811436696097964,
+  "validacion": 0.6769488283118124,
+  "segundos": 96.7
  },
  {
   "epoca": 11,
-  "perdida": 1.0397965034802754,
-  "validacion": 0.6854973696795791,
-  "segundos": 136.6
+  "perdida": 0.7631678975877307,
+  "validacion": 0.6785031085604973,
+  "segundos": 102.0
  },
  {
   "epoca": 12,
-  "perdida": 1.0311012713386898,
-  "validacion": 0.6910768372389605,
-  "segundos": 133.5
+  "perdida": 0.7515366506349472,
+  "validacion": 0.6810337956320739,
+  "segundos": 100.5
  },
  {
   "epoca": 13,
-  "perdida": 1.0194018919218155,
-  "validacion": 0.6937470109995217,
-  "segundos": 127.3
+  "perdida": 0.7402993838446481,
+  "validacion": 0.6854774430097242,
+  "segundos": 95.1
  },
  {
   "epoca": 14,
-  "perdida": 1.0077789293107533,
-  "validacion": 0.694922684520963,
-  "segundos": 130.4
+  "perdida": 0.7296112241926648,
+  "validacion": 0.6884465168181094,
+  "segundos": 94.7
  },
  {
   "epoca": 15,
-  "perdida": 0.9979974781127203,
-  "validacion": 0.6971146182050056,
-  "segundos": 130.4
+  "perdida": 0.7203925476028805,
+  "validacion": 0.6880679100908657,
+  "segundos": 94.0
  },
  {
   "epoca": 16,
-  "perdida": 0.9911344510941278,
-  "validacion": 0.6977721983102184,
-  "segundos": 126.3
+  "perdida": 0.7067352804070427,
+  "validacion": 0.6871313566076837,
+  "segundos": 97.0
  },
  {
   "epoca": 17,
-  "perdida": 0.9791374282019479,
-  "validacion": 0.6976725649609438,
-  "segundos": 123.8
+  "perdida": 0.7003974118459793,
+  "validacion": 0.6902199904351984,
+  "segundos": 96.8
  },
  {
   "epoca": 18,
-  "perdida": 0.9763141324951535,
-  "validacion": 0.6984098517455763,
-  "segundos": 127.3
+  "perdida": 0.6951574885618119,
+  "validacion": 0.6950223178702376,
+  "segundos": 101.6
  },
  {
   "epoca": 19,
-  "perdida": 0.9694414446467445,
-  "validacion": 0.6997847919655666,
-  "segundos": 125.7
+  "perdida": 0.6918920821507771,
+  "validacion": 0.6944045911047345,
+  "segundos": 100.9
  },
  {
   "epoca": 20,
-  "perdida": 0.9690217712811061,
-  "validacion": 0.6980511716881874,
-  "segundos": 127.1
+  "perdida": 0.6858240657125201,
+  "validacion": 0.693089430894309,
+  "segundos": 101.6
  }
 ]

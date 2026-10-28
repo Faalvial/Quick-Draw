@@ -8,7 +8,7 @@ __pycache__/
 # - prefijos rasterizados (~1,5 GB)
 trabajo*/cache/
 # - checkpoint por época: solo sirve para retomar; modelo.pt sí se sube
-trabajo*/modelos/*/checkpoint.pt
+**/checkpoint.pt
 # - modo rápido: solo comprueba que todo corre
 trabajo_rapido/
 # - experimentos de la sección "Modificar" de la guía de dominio

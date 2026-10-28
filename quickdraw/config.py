@@ -47,9 +47,11 @@ class Config:
     semillas: tuple = (0, 1, 2)        # una por repetición de M2 y M2-P
     semillas_m1: tuple = (0,)          # M1 con una semilla; (0, 1, 2) si sobra tiempo
     dibujos_val_auc: int = 3000        # submuestra de validación para la AUC por época
-    # Esquema de M2-P: "prefijos" (un prefijo al azar, el del plan) o "mixto"
-    # (con probabilidad m2p_prob_completo, el dibujo completo). Ver docs/04.
-    esquema_m2p: str = "prefijos"
+    # Esquema de M2-P: "prefijos" (un prefijo al azar, el del plan v5) o "mixto"
+    # (con probabilidad m2p_prob_completo, el dibujo completo). El oficial es el
+    # mixto, adoptado con la regla fijada antes de entrenarlo ("Decisión sobre
+    # H2" en docs/04); el original queda en trabajo/alternativas/M2-P_prefijos.
+    esquema_m2p: str = "mixto"
     m2p_prob_completo: float = 0.5
 
     # --- Búsqueda de hiperparámetros (solo M2) --------------------------------
