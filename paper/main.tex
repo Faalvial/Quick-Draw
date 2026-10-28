@@ -11,6 +11,10 @@
 %   trabajo/resultados/fig_prefijos.png           ->  figuras/
 % Mientras falte un archivo, se dibuja un recuadro con su nombre.
 %
+% Cada sección está en su propio archivo de secciones/ (el comentario de arriba
+% de cada archivo dice quién la redacta y quién la revisa). Así cada integrante
+% edita solo su archivo y nadie pisa el trabajo de otro.
+%
 % Numeración: LaTeX numera figuras y tablas en el orden en que se DEFINEN en
 % este archivo; por eso los pies no llevan número y en el texto se cita con
 % \ref{...}. El orden de abajo da la numeración del plan: Fig. 1 prefijos,
@@ -51,187 +55,26 @@ Inteligencia Artificial (CC421), 2026-II}
 
 \maketitle
 
-% Resumen · Redacta: Farid · Revisan: todos · Semana 14 · 150 a 200 palabras.
-% Debe cubrir: la pregunta, los datos (30 categorías), los tres modelos,
-% el resultado principal de cada hipótesis con su número, la conclusión.
-\begin{abstract}
-\pendiente{Resumen}
-\end{abstract}
-
-\begin{IEEEkeywords}
-\pendiente{Palabras clave}
-\end{IEEEkeywords}
-
-% I · Redacta: Elias · Revisa: Jorly · Semana 9 · ~0,4 pág.
-% Sale de: avance 1.1 a 1.3 y 1.6.
-% Debe cubrir: el juego y su mecánica (la ronda termina cuando la IA
-% acierta), el problema en sus tres preguntas, la pregunta de investigación,
-% las contribuciones (de los objetivos 1.5, sin M0 ni PCA) y la
-% organización del paper.
-\section{Introducción}
-\pendiente{Introducción}
-
-% II · Redacta: Jorly · Revisa: Farid · Semana 9 · ~0,3 pág.
-% Sale de: avance 2.1, 2.2 y 2.4. Sin la calibración (2.3).
-% Debe cubrir: Sketch-a-Net, SketchMamba y en qué se diferencia este trabajo.
-\section{Trabajo relacionado}
-\pendiente{Trabajo relacionado}
-
+\input{secciones/00_resumen}
+\input{secciones/1_introduccion}
+\input{secciones/2_trabajo_relacionado}
 % III · Metodología. La teoría necesaria va dentro de cada subsección.
 \section{Metodología}
 
-% III-A · Redacta: Elias · Revisa: Omar · Semana 9 · ~0,3 pág.
-% Sale de: avance 3.1 y 3.6.1; docs/01_datos.md.
-% Debe cubrir: el dataset y sus campos, el criterio de selección de las 30
-% categorías (langosta por trompeta, violín como excepción), el muestreo
-% por reservorio, las particiones 70/15/15 por dibujo y la tabla de hechos
-% resumida.
-\subsection{Datos}
-\pendiente{Datos}
-
-% III-B · Redacta: Jorly · Revisa: Cristian · Semana 9 · ~0,3 pág.
-% Sale de: avance 3.2 (ecuaciones 1 a 3); docs/02_prefijos_y_rasterizacion.md.
-% Debe cubrir: prefijo D_k, normalización causal, rasterización a 28x28
-% (lienzo 256, grosor 16, margen 2; el avance decía 1, ver docs/02) y la Fig. 1.
-\subsection{Prefijos y normalización causal}
-\pendiente{Prefijos y normalización causal}
-
-\begin{figure}[t]
-\centering
-\figura{fig_prefijos.png}{\columnwidth}
-\caption{\pendiente{Prefijos con normalización causal (fila superior) frente a la caja del dibujo completo.}}
-\label{fig:prefijos}
-\end{figure}
-
-% III-C · Redacta: Cristian · Revisa: Elias · Semana 10 · ~0,4 pág.
-% Sale de: avance 3.3 y 3.4 (Cuadro 3); docs/03 y docs/04.
-% Debe cubrir: softmax y entropía cruzada en una línea, M1, la CNN de M2
-% y M2-P (Cuadro 3, GAP), el esquema de prefijos de M2-P, la búsqueda de
-% hiperparámetros, las semillas, la parada temprana y UNA línea que diga
-% que el alcance se redujo respecto al avance y por qué.
-\subsection{Modelos y entrenamiento}
-\pendiente{Modelos y entrenamiento}
-
-% III-D · Redacta: Omar · Revisa: Farid · Semana 10 · ~0,4 pág.
-% Sale de: avance 3.6.2, 3.6.3 y 3.7 (ecuaciones 9 y 10, Cuadro 4); docs/05 y docs/06.
-% Debe cubrir: exactitud por fracción, top-3, AUC progresiva, k*, bootstrap,
-% McNemar y los criterios de H1, H2 y H5 (en las tres semillas).
-\subsection{Métricas y pruebas estadísticas}
-\pendiente{Métricas y pruebas estadísticas}
-
-% III-E · Redacta: Farid · Revisa: Omar · Semana 10 · ~0,2 pág.
-% Sale de: plan v5 ("H4 reformulada"); docs/07_analisis_h4.md.
-% Debe cubrir: confundibilidad con kNN en el espacio GAP de M2, mediana de
-% k*/K de M2-P, Spearman, por qué no es circular y t-SNE solo para mirar.
-\subsection{Confundibilidad en el espacio de la CNN}
-\pendiente{Confundibilidad}
-
+\input{secciones/3a_datos}
+\input{secciones/3b_prefijos}
+\input{secciones/3c_modelos}
+\input{secciones/3d_metricas}
+\input{secciones/3e_confundibilidad}
 % IV · Resultados. Hasta la semana 12 con números de VALIDACIÓN;
 % en la semana 13 se reemplazan por los de PRUEBA (regenerar tablas/ y figuras/).
 \section{Resultados}
 
-% IV-A · Redacta: Cristian · Revisa: Omar · Semana 11 · ~0,2 pág.
-\subsection{Búsqueda de hiperparámetros}
-\pendiente{Búsqueda de hiperparámetros}
-
-\begin{table}[t]
-\centering
-\caption{\pendiente{Búsqueda de hiperparámetros en validación.}}
-\label{tab:busqueda}
-\resizebox{\columnwidth}{!}{\tabla{tabla_busqueda.tex}}
-\end{table}
-
-% IV-B · Redacta: Omar · Revisa: Cristian · Semanas 12 y 13 · ~0,5 pág.
-% Debe cubrir: Tabla 2, Figs. 2, 3 y 6, y el veredicto de H1, H2 y H5 con su número.
-\subsection{¿Con cuántos trazos? (H1, H2 y H5)}
-\pendiente{H1, H2 y H5}
-
-\begin{table}[t]
-\centering
-\caption{\pendiente{M1, M2 y M2-P, media $\pm$ desviación de las semillas.}}
-\label{tab:modelos}
-\resizebox{\columnwidth}{!}{\tabla{tabla_modelos.tex}}
-\end{table}
-
-\begin{figure}[t]
-\centering
-\figura{fig_curvas_fraccion.png}{\columnwidth}
-\caption{\pendiente{Exactitud por fracción del dibujo (figura principal).}}
-\label{fig:curvas}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\figura{fig_exactitud_por_k.png}{\columnwidth}
-\caption{\pendiente{Exactitud por número de trazos.}}
-\label{fig:k}
-\end{figure}
-
-% IV-C · Redacta: Farid · Revisa: Jorly · Semanas 12 y 13 · ~0,3 pág.
-% Debe cubrir: Figs. 4 y 5, el veredicto de H4 y la separación de pares
-% (separacion_pares.csv).
-\subsection{¿Por qué algunas categorías necesitan más? (H4)}
-\pendiente{H4 y análisis por par}
-
-\begin{figure*}[t]
-\centering
-\figura{fig_tsne.png}{0.85\textwidth}
-\caption{\pendiente{t-SNE de los vectores GAP de M2-P al 30\,\% y al 100\,\% del dibujo.}}
-\label{fig:tsne}
-\end{figure*}
-
-\begin{figure}[t]
-\centering
-\figura{fig_h4.png}{\columnwidth}
-\caption{\pendiente{H4: confundibilidad frente a la mediana de $k^*/K$.}}
-\label{fig:h4}
-\end{figure}
-
-% Fig. 6 (H5) y Fig. 7 (trazo a trazo) se definen aquí, después de H4, para
-% que la numeración siga el plan; en IV-B se citan con \ref{fig:h5}.
-\begin{figure}[t]
-\centering
-\figura{fig_h5.png}{\columnwidth}
-\caption{\pendiente{H5: distribución de $K-k^*$ (trazos de anticipación).}}
-\label{fig:h5}
-\end{figure}
-
-% Fig. 7 · Prepara: Jorly. Predicción de M1, M2 y M2-P en cada trazo de
-% cuatro dibujos de los pares; respaldo de la demo en la exposición.
-\begin{figure*}[t]
-\centering
-\figura{fig_trazo_a_trazo.png}{0.85\textwidth}
-\caption{\pendiente{Predicción de cada modelo trazo a trazo en dibujos de los pares.}}
-\label{fig:trazo}
-\end{figure*}
-
-% V · Redactan: todos, cada uno sobre su hipótesis o módulo; Elias junta
-% las limitaciones · Revisa: Farid · Semana 14 · ~0,4 pág.
-% Sale de: avance 1.6 y los criterios de cada hipótesis.
-% Debe cubrir: qué significa cada veredicto, la Tabla 3 (protocolo frente
-% a SketchMamba), las limitaciones (país, recognized, dibujos cortados,
-% simplificación, H4 depende de una CNN, 3 semillas) y trabajo futuro.
-\section{Discusión y limitaciones}
-\pendiente{Discusión y limitaciones}
-
-\begin{table}[t]
-\centering
-\caption{\pendiente{Diferencias de protocolo con SketchMamba (prepara Jorly).}}
-\label{tab:protocolo}
-\pendiente{Tabla 3}
-\end{table}
-
-\begin{table}[t]
-\centering
-\caption{\pendiente{Resumen de las hipótesis por semilla.}}
-\label{tab:hipotesis}
-\resizebox{\columnwidth}{!}{\tabla{tabla_hipotesis.tex}}
-\end{table}
-
-% VI · Redacta: Farid · Revisan: todos · Semana 14 · ~0,2 pág.
-\section{Conclusiones}
-\pendiente{Conclusiones}
-
+\input{secciones/4a_busqueda}
+\input{secciones/4b_h1_h2_h5}
+\input{secciones/4c_h4}
+\input{secciones/5_discusion}
+\input{secciones/6_conclusiones}
 % Opcional, según lo que pida el curso. La DUIA va aparte con firmas (Nivel 3).
 % \section*{Declaración de uso de IA}
 
