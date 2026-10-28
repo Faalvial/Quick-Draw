@@ -6,7 +6,7 @@
 
 ## Cómo abrirla
 
-Opción 1, el notebook de la demo (recomendado para la exposición): abran `notebooks/demo.ipynb` en Colab y ejecuten todo. Carga las cachés y los modelos ya entrenados de Drive; **no entrena nada** y se detiene con un mensaje si todavía no hay modelos.
+Opción 1, el notebook de la demo (recomendado para la exposición): abran `notebooks/demo.ipynb` en Colab y ejecuten todo. Se abre directo desde GitHub ([enlace](https://colab.research.google.com/github/Faalvial/Quick-Draw/blob/main/notebooks/demo.ipynb)); la primera celda clona el repositorio, que ya trae los modelos entrenados. **No entrena nada**: la primera vez en cada sesión crea la caché de prefijos (10 a 20 min en Colab) y se detiene con un mensaje si no hay modelos. Para la exposición, ábranla con tiempo o usen `COLAB_ORIGEN = "drive"` para que la caché quede guardada.
 
 Opción 2, al final del notebook principal, en una celda nueva:
 

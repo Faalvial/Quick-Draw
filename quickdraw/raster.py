@@ -116,7 +116,7 @@ def cargar_cache(ruta: Path):
 
 
 def obtener_cache(dibujos, indices, nombre, cfg: Config, procesos: int = 2):
-    """Carga la caché si ya existe en disco (por ejemplo en Drive); si no, la crea.
+    """Carga la caché si ya existe en disco; si no, la crea.
 
     El nombre del archivo lleva los parámetros que cambian las imágenes: si el
     grupo cambia el grosor o la resolución, se crea una caché nueva.

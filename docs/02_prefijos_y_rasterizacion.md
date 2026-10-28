@@ -20,7 +20,7 @@ Para un dibujo con K trazos genera K imágenes de 28×28: la imagen k tiene solo
 - **Un solo factor de escala.** Con factores distintos para x e y, una línea horizontal se estiraría hasta ocupar un cuadrado y se perdería la forma.
 - **Un solo punto.** Si el prefijo es un punto (caja de tamaño cero), se dibuja en el centro en vez de dividir entre cero.
 - **Margen de 2 píxeles.** La línea central del trazo queda a 2 px del borde y el trazo mide ~1,75 px, así que queda un anillo de 1 px sin tinta: la tinta no toca el borde, donde las convoluciones con relleno ven ceros. Con margen 1 la tinta sí lo tocaba: en 500 gatos de la muestra, el 10 % de los píxeles del borde tenía tinta (hasta 227 de 255); con margen 2, ninguno. El avance decía margen 1; el cambio se decidió antes de entrenar y se declara en el paper.
-- **Caché en disco.** Rasterizar los ~2,2 millones de prefijos tarda varios minutos; se hace una vez y se guarda en Drive (unos 1,7 GB con prueba). El nombre del archivo lleva los parámetros, así que si los cambian se crea una caché nueva.
+- **Caché en disco.** Rasterizar los ~2,2 millones de prefijos tarda varios minutos; se hace una vez y se guarda en `trabajo/cache` (unos 1,7 GB con prueba). Git no la sube; en Colab sin Drive se crea en cada sesión. El nombre del archivo lleva los parámetros, así que si los cambian se crea una caché nueva.
 - **En memoria, sin DataLoader.** Todas las imágenes caben en la RAM de Colab como `uint8`, así que entrenar es solo indexar ese arreglo.
 
 ## Dónde modificar

@@ -25,7 +25,7 @@ def cargar_muestra(cfg: Config, categorias=CATEGORIAS):
         ruta = Path(cfg.ruta_muestra) / f"{cat}.ndjson.gz"
         if not ruta.exists():
             raise FileNotFoundError(
-                f"Falta {ruta}. Suban la carpeta muestra_30 a Drive o ejecuten "
+                f"Falta {ruta}. Viene en el repositorio (datos/muestra_30); si la borraron, ejecuten "
                 "datos/download_sample.py (ver docs/01_datos.md).")
         with gzip.open(ruta, "rt") as f:
             for i, linea in enumerate(f):

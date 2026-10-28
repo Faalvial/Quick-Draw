@@ -2,24 +2,24 @@
 
 Este documento explica cómo correr todo, qué se guarda, cómo retomar cuando Colab corta la sesión y **qué borrar cuando modifican algo**.
 
-## 1. Preparar Drive (una sola vez)
+## 1. Dónde trabajar: Colab, Colab con Drive o su computadora
 
-El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra_30`, 62 MB) y los modelos y resultados de la corrida de referencia (`trabajo/`, ver la sección 10).
+El repositorio ya trae todo lo necesario: el código, la muestra (`datos/muestra_30`, 62 MB) y los modelos y resultados de la corrida oficial (`trabajo/`, ver la sección 10). Cada integrante trabaja con su propia copia; nadie necesita la carpeta de otro.
 
-1. Una persona del grupo abre un notebook en blanco en Colab y clona el repositorio dentro de Drive:
+**a) Colab, sin Drive (lo normal).** Abran el notebook directo desde GitHub: [notebook principal](https://colab.research.google.com/github/Faalvial/Quick-Draw/blob/main/notebooks/proyecto_quickdraw.ipynb) o [demo](https://colab.research.google.com/github/Faalvial/Quick-Draw/blob/main/notebooks/demo.ipynb). La primera celda clona el repositorio en `/content/Quick-Draw` (`COLAB_ORIGEN = "clonar"`). Colab borra `/content` al cerrar la sesión, así que cada sesión vuelve a clonar y a crear la caché de prefijos (unos 10 a 20 min). Alcanza para estudiar, evaluar y todos los experimentos que no reentrenan.
 
-   ```python
-   from google.colab import drive
-   drive.mount("/content/drive")
-   !git clone https://github.com/Faalvial/Quick-Draw.git /content/drive/MyDrive/quickdraw-early
-   ```
+**b) Colab con Drive (solo para reentrenar).** En la primera celda pongan `COLAB_ORIGEN = "drive"`: el repositorio se clona en `MyDrive/quickdraw-early` la primera vez y después se reutiliza, con su caché y sus checkpoints. Así un entrenamiento de horas sobrevive a los cortes de Colab (sección 4). Para traer cambios del repositorio: `!git -C /content/drive/MyDrive/quickdraw-early pull`.
 
-2. Comparte la carpeta `quickdraw-early` con el grupo. Cada integrante, desde su cuenta: *clic derecho → Organizar → Agregar acceso directo a Mi unidad*. La ruta tiene que quedar igual: `MyDrive/quickdraw-early`.
-3. Para traer cambios nuevos del repositorio: `!git -C /content/drive/MyDrive/quickdraw-early pull`.
+**c) Su computadora.** `git clone https://github.com/Faalvial/Quick-Draw.git` y la sección 9. No hace falta Colab ni Drive; en CPU todo menos reentrenar tarda minutos.
 
-Si prefieren otra ruta, cambien `RAIZ` en la primera celda del notebook. Si borran `datos/muestra_30`, el notebook la vuelve a descargar con `datos/download_sample.py` (unos minutos; sale idéntica por la semilla 2026).
+Si borran `datos/muestra_30`, el notebook la vuelve a descargar con `datos/download_sample.py` (unos minutos; sale idéntica por la semilla 2026).
 
-**Fuera de Colab** basta con `git clone` y la sección 9.
+### Cómo compartir cambios sin pisarse
+
+- Cada integrante trabaja en **su propia rama** (`git checkout -b elias`, por ejemplo) y sube sus cambios con un *pull request* a `main`. GitHub corre las pruebas y el modo rápido en cada uno: si algo se rompe, se ve antes de mezclarlo.
+- Cada uno toca solo los archivos de su módulo (la tabla "Estructura" del README) y su sección del paper (`paper/secciones/`). Así dos personas nunca editan el mismo archivo.
+- `trabajo/` (la corrida oficial) no se modifica en las ramas personales: los experimentos van en `trabajo_pruebas/` (sección 7), que git ignora.
+- Para subir cambios hace falta acceso de escritura al repositorio, que da su dueño.
 
 ## 2. Primera prueba: modo rápido
 
@@ -32,7 +32,7 @@ El modo rápido (`config_rapida` en `quickdraw/config.py`) usa 120 dibujos por c
 
 ## 3. La corrida real
 
-**La corrida oficial ya está hecha y viene en el repositorio** (`trabajo/`, ver la sección 10). Con `MODO_RAPIDO = False`, "Ejecutar todas" no entrena nada: carga la búsqueda, los modelos y las predicciones, y rehace métricas, hipótesis, figuras y tablas en validación. La primera vez en cada Drive también crea la caché de prefijos, que no se sube al repositorio. Si después de clonar el notebook recalcula alguna predicción, es normal (git no conserva qué archivo es más nuevo) y tarda unos minutos.
+**La corrida oficial ya está hecha y viene en el repositorio** (`trabajo/`, ver la sección 10). Con `MODO_RAPIDO = False`, "Ejecutar todas" no entrena nada: carga la búsqueda, los modelos y las predicciones, y rehace métricas, hipótesis, figuras y tablas en validación. La primera vez en cada Drive también crea la caché de prefijos, que no se sube al repositorio. En Colab sin Drive la caché se crea en cada sesión. Si después de clonar el notebook recalcula alguna predicción, es normal (git no conserva qué archivo es más nuevo) y tarda unos minutos.
 
 Tiempos medidos en la corrida oficial (CPU de 4 núcleos, sin GPU, 27 de octubre de 2026):
 
@@ -43,7 +43,7 @@ Tiempos medidos en la corrida oficial (CPU de 4 núcleos, sin GPU, 27 de octubre
 | Entrenamiento | M1 (1 semilla), M2 y M2-P (3 semillas cada uno), hasta 20 épocas | 3 h 33 min (~135 s por época de M2 o M2-P; ~10 s de M1) | ya hecho: solo se carga |
 | Evaluación | Métricas, hipótesis y figuras en validación | 14 min la primera vez; ~3 min con las predicciones guardadas | unos minutos |
 
-En total, 4 h 57 min. La caché ocupa unos 1,5 GB en Drive y la corrida usó unos 4,6 GB de RAM: cabe en Colab. Si reentrenan algo en una T4, será más rápido que en CPU (AMP se activa solo con GPU).
+En total, 4 h 57 min. La caché ocupa unos 1,5 GB en disco y la corrida usó unos 4,6 GB de RAM: cabe en Colab. Si reentrenan algo en una T4, será más rápido que en CPU (AMP se activa solo con GPU).
 
 **Repartir el trabajo entre cuentas.** Cada modelo y cada semilla se guardan en su propia carpeta, así que dos personas pueden entrenar a la vez sobre la misma carpeta compartida sin pisarse. Por ejemplo, en una cuenta:
 

@@ -12,7 +12,9 @@ Se entrenan tres modelos sobre 30 categorías de Quick, Draw! (5 pares confundib
 
 ## Empezar
 
-Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: clonen el repositorio en `MyDrive/quickdraw-early/` (sección 1), abran `notebooks/proyecto_quickdraw.ipynb` en Colab y ejecuten todo; primero con `MODO_RAPIDO = True` para comprobar que corre (un par de minutos).
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Faalvial/Quick-Draw/blob/main/notebooks/proyecto_quickdraw.ipynb)
+
+Lean [`docs/00_como_ejecutar.md`](docs/00_como_ejecutar.md). En resumen: abran el notebook en Colab con el botón de arriba (la primera celda clona el repositorio; no hace falta Drive) o clonen el repositorio en su computadora, y ejecuten todo; primero con `MODO_RAPIDO = True` para comprobar que corre (un par de minutos). Drive solo hace falta para reentrenar (sección 1 de `docs/00`). Cada integrante trabaja en su propia rama y su propio módulo: ver "Cómo compartir cambios sin pisarse" en esa misma sección.
 
 El repositorio trae la muestra de datos (`datos/muestra_30`) y la **corrida oficial ya hecha** en `trabajo/`: búsqueda de hiperparámetros, M1, M2 y M2-P con sus semillas, predicciones, métricas, hipótesis, figuras y tablas LaTeX, todo en **validación** (resumen en la sección 10 de `docs/00`). El conjunto de prueba sigue bloqueado hasta la semana 13. Con la corrida hecha, "Ejecutar todas" no entrena nada: solo carga y evalúa.
 
