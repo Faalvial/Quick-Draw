@@ -9,9 +9,10 @@
 ### Qué imagen ve cada modelo (`indices_de_epoca`)
 
 - **M1 y M2 (`'completos'`):** en cada época, el dibujo completo de cada dibujo de entrenamiento.
-- **M2-P (`'prefijos'`):** en cada época, **un prefijo al azar** de cada dibujo, con k uniforme entre 1 y K. En la época siguiente se sortea otro k.
+- **M2-P (`'mixto'`, el oficial):** en cada época, con probabilidad `m2p_prob_completo = 0.5` el dibujo completo, y si no **un prefijo al azar**, con k uniforme entre 1 y K. En la época siguiente se vuelve a sortear.
+- **M2-P original del plan v5 (`'prefijos'`):** siempre un prefijo al azar. Refutó H2 en validación y quedó como alternativa en `trabajo/alternativas/M2-P_prefijos/` (ver "Decisión sobre H2", al final).
 
-Cada dibujo aporta una imagen por época en los dos esquemas, así que M2 y M2-P hacen el mismo número de pasos y los dibujos con muchos trazos no pesan más.
+Cada dibujo aporta una imagen por época en todos los esquemas, así que M2 y M2-P hacen el mismo número de pasos y los dibujos con muchos trazos no pesan más.
 
 ### Bucle de entrenamiento (`entrenar`)
 
@@ -52,9 +53,11 @@ M2 y M2-P se entrenan con las semillas 0, 1 y 2; M1 solo con la 0 (`semillas_m1`
 | Entrenar solo un modelo | `E.entrenar_modelos(cfg, D, hp, nombres=("M2-P",))` |
 | Elegir hiperparámetros a mano | Editen el diccionario `hp` en el notebook antes de `entrenar_modelos`; si cambian `hp["M2"]`, cambien también `hp["M2-P"]` (debe heredar la misma) |
 
-### Si H2 falla porque M2-P pierde exactitud final
+### H2 y el esquema mixto
 
-En la corrida oficial (validación, `00_como_ejecutar.md`, sección 10) pasó justo esto: M2-P ganó entre 0,074 y 0,100 de AUC progresiva, pero perdió 1,8, 0,9 y 2,2 puntos de exactitud final con las semillas 0, 1 y 2; el criterio de H2 permite 1, así que H2 queda refutada. Si el grupo decide modificar el método, una opción razonable es **mezclar dibujos completos** en el entrenamiento de M2-P: por ejemplo, con probabilidad 0,5 usar el dibujo completo y si no un prefijo al azar. Ya está implementado: en el notebook, al crear `cfg`, agreguen `esquema_m2p="mixto"` (y si quieren otra proporción, `m2p_prob_completo=0.3`). Para reentrenar M2-P, borren antes `trabajo/modelos/M2-P_s*` y `trabajo/resultados/predicciones_*` o el notebook se detiene avisando que la configuración cambió. Conviene probarlo primero en `trabajo_pruebas` (`00_como_ejecutar.md`, sección 7). En CPU, las tres semillas de M2-P tardaron unas 2 h; en una T4, menos.
+Con el esquema original (un prefijo al azar), en validación pasó justo esto: M2-P ganó entre 0,074 y 0,100 de AUC progresiva, pero perdió 1,8, 0,9 y 2,2 puntos de exactitud final con las semillas 0, 1 y 2; el criterio de H2 permite 1. La modificación prevista es **mezclar dibujos completos** en el entrenamiento de M2-P: con probabilidad 0,5 el dibujo completo y si no un prefijo al azar (`esquema_m2p="mixto"`, que ahora es el valor por defecto de `config.py`). Se aplicó con la regla de la sección siguiente.
+
+Para experimentar con otra proporción o volver al esquema original, háganlo en `trabajo_pruebas` (`00_como_ejecutar.md`, sección 7) con `cfg = replace(cfg, esquema_m2p="prefijos")` o `m2p_prob_completo=0.3`; sobre `trabajo/` el notebook se detiene avisando que la configuración cambió. En CPU, las tres semillas de M2-P tardan entre 1,5 y 2 h; en una T4, menos.
 
 Es un cambio de método: debe decidirse con los resultados de **validación** (nunca de prueba) y declararse en el paper.
 
@@ -67,3 +70,5 @@ Con el esquema original, M2-P perdió más de 1 punto de exactitud final en vali
 3. **Regla para adoptarlo.** El esquema mixto pasa a ser el M2-P oficial si cumple el criterio de H2 **en las tres semillas** (límite inferior del IC 95 % de la diferencia de AUC > 0 y caída de exactitud final ≤ 1 punto). Si no lo cumple, se mantiene el esquema original y H2 se reporta refutada.
 4. **Qué se reporta.** En los dos casos, el paper reporta los resultados de validación de **ambos** esquemas y dice que el cambio se decidió con esta regla, antes de la prueba. Si se adopta el mixto, H4 y H5 se reevalúan con él, porque también usan M2-P.
 5. **La prueba.** En la semana 13 se evalúa solo el M2-P oficial. El otro esquema queda guardado en `trabajo/alternativas/` para el paper y no se evalúa en prueba.
+
+**Resultado (28 de octubre de 2026).** El esquema mixto cumplió el criterio de H2 en las tres semillas: límite inferior del IC de la diferencia de AUC 0,057, 0,098 y 0,067, y caída de exactitud final 0,6, −2,2 y 0,2 puntos (con la semilla 1, M2-P supera a M2, que se detuvo temprano en la época 6). Según la regla, **el mixto pasó a ser el M2-P oficial** (`trabajo/modelos/M2-P_s*`) y H4 y H5 se reevaluaron con él: siguen confirmadas. El esquema original quedó en `trabajo/alternativas/M2-P_prefijos/` para el paper. Entrenar las tres semillas tardó 1 h 32 min en CPU.
